@@ -18,6 +18,7 @@ const validApplication = {
   motivation: "I want to contribute a practical salon session that connects creative funding, decentralized infrastructure, and conflict transformation.",
   contribution: ["Creator spotlight", "Workshop"],
   arrival: "July 8 setup window",
+  travelSupport: "Berlin transfer",
   accommodation: "Shared glamping",
   dietary: "Vegetarian",
   website: "https://example.org",
@@ -55,6 +56,7 @@ test("validateApplication reports every required missing field", () => {
     "location",
     "motivation",
     "project",
+    "travelSupport",
   ]);
 });
 
@@ -97,6 +99,8 @@ test("serializeApplicationForSheet creates a row payload", () => {
   assert.match(payload.submittedAt, /^\d{4}-\d{2}-\d{2}T/);
   assert.equal(payload.fullName, "Ada Lovelace");
   assert.equal(payload.contribution, "Creator spotlight, Workshop");
+  assert.equal(payload.travelSupport, "Berlin transfer");
+  assert.match(payload.summary, /Travel support needed: Berlin transfer/);
   assert.match(payload.summary, /Artizen Village application/);
 });
 

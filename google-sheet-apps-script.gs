@@ -10,6 +10,7 @@ const HEADERS = [
   "motivation",
   "contribution",
   "arrival",
+  "travelSupport",
   "accommodation",
   "dietary",
   "website",
