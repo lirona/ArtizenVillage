@@ -16,13 +16,11 @@ const validApplication = {
   affiliation: "Artizen creator",
   project: "A public-good research artwork for decentralized communities.",
   motivation: "I want to contribute a practical salon session that connects creative funding, decentralized infrastructure, and conflict transformation.",
-  contribution: ["Creator spotlight", "Participatory workshop"],
+  contribution: ["Creator spotlight", "Workshop"],
   arrival: "July 8 setup window",
-  ticketSupport: "Can pay full rate",
   accommodation: "Shared glamping",
   dietary: "Vegetarian",
   website: "https://example.org",
-  consent: true
 };
 
 test("normalizeApplication trims strings and splits comma contributions", () => {
@@ -30,13 +28,11 @@ test("normalizeApplication trims strings and splits comma contributions", () => 
     fullName: " Ada ",
     email: " ada@example.org ",
     contribution: "Workshop, Documentation",
-    consent: "yes"
   });
 
   assert.equal(normalized.fullName, "Ada");
   assert.equal(normalized.email, "ada@example.org");
   assert.deepEqual(normalized.contribution, ["Workshop", "Documentation"]);
-  assert.equal(normalized.consent, true);
 });
 
 test("validateApplication accepts a complete application", () => {
@@ -53,14 +49,12 @@ test("validateApplication reports every required missing field", () => {
   assert.deepEqual(Object.keys(result.errors).sort(), [
     "affiliation",
     "arrival",
-    "consent",
     "contribution",
     "email",
     "fullName",
     "location",
     "motivation",
     "project",
-    "ticketSupport"
   ]);
 });
 
@@ -102,7 +96,7 @@ test("serializeApplicationForSheet creates a row payload", () => {
 
   assert.match(payload.submittedAt, /^\d{4}-\d{2}-\d{2}T/);
   assert.equal(payload.fullName, "Ada Lovelace");
-  assert.equal(payload.contribution, "Creator spotlight, Participatory workshop");
+  assert.equal(payload.contribution, "Creator spotlight, Workshop");
   assert.match(payload.summary, /Artizen Village application/);
 });
 

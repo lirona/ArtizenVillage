@@ -19,11 +19,9 @@ export function normalizeApplication(source = {}) {
     motivation: String(source.motivation || "").trim(),
     contribution,
     arrival: String(source.arrival || "").trim(),
-    ticketSupport: String(source.ticketSupport || "").trim(),
     accommodation: String(source.accommodation || "").trim(),
     dietary: String(source.dietary || "").trim(),
-    website: String(source.website || "").trim(),
-    consent: source.consent === true || source.consent === "yes"
+    website: String(source.website || "").trim()
   };
 }
 
@@ -67,13 +65,7 @@ export function validateApplication(source = {}) {
     errors.arrival = "Choose an arrival plan.";
   }
 
-  if (!data.ticketSupport) {
-    errors.ticketSupport = "Choose a ticket support option.";
-  }
 
-  if (!data.consent) {
-    errors.consent = "Consent is required.";
-  }
 
   return {
     data,
@@ -100,7 +92,6 @@ export function buildApplicationSummary(source = {}) {
     "",
     `Contribution: ${data.contribution.join(", ")}`,
     `Arrival plan: ${data.arrival}`,
-    `Ticket support: ${data.ticketSupport}`,
     `Accommodation: ${optional(data.accommodation)}`,
     `Dietary notes: ${optional(data.dietary)}`,
     `Link: ${optional(data.website)}`
@@ -120,7 +111,6 @@ export function serializeApplicationForSheet(source = {}) {
     motivation: data.motivation,
     contribution: data.contribution.join(", "),
     arrival: data.arrival,
-    ticketSupport: data.ticketSupport,
     accommodation: data.accommodation,
     dietary: data.dietary,
     website: data.website,
@@ -181,11 +171,9 @@ export function readApplicationForm(form) {
     motivation: formData.get("motivation"),
     contribution: formData.getAll("contribution"),
     arrival: formData.get("arrival"),
-    ticketSupport: formData.get("ticketSupport"),
     accommodation: formData.get("accommodation"),
     dietary: formData.get("dietary"),
-    website: formData.get("website"),
-    consent: formData.get("consent")
+    website: formData.get("website")
   };
 }
 
