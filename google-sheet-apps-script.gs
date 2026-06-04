@@ -8,11 +8,10 @@ const HEADERS = [
   "affiliation",
   "project",
   "motivation",
+  "dwebPrinciples",
   "contribution",
   "arrival",
-  "travelSupport",
   "accommodation",
-  "dietary",
   "website",
   "summary"
 ];

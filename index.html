@@ -190,7 +190,7 @@
             </figure>
           </div>
 
-          <form class="application-form" data-application-form data-google-sheet-endpoint="" novalidate>
+          <form class="application-form" data-application-form data-google-sheet-endpoint="https://script.google.com/macros/s/AKfycbxjUJqXMK7K-ZZHR-ZLrdpVC2xNXVJZM0n64JGzsS43eRU0A7ADI3lifiWOwfvh3A0eXA/exec" novalidate>
             <div class="field-grid">
               <label>
                 Full name
@@ -230,6 +230,12 @@
               <textarea name="motivation" rows="5" required></textarea>
             </label>
 
+            <label>
+              Which DWeb principles resonate with you, and in what way?
+              <a class="field-link" href="https://getdweb.net/principles/" target="_blank" rel="noopener">Review the DWeb Principles</a>
+              <textarea name="dwebPrinciples" rows="4" required></textarea>
+            </label>
+
             <fieldset>
               <legend>How can you contribute?</legend>
               <div class="checkbox-grid">
@@ -256,23 +262,6 @@
                 </select>
               </label>
               <label>
-                Travel support needed
-                <select name="travelSupport" required>
-                  <option value="">Choose one</option>
-                  <option>None</option>
-                  <option>Route planning</option>
-                  <option>Berlin transfer</option>
-                  <option>Local transport support</option>
-                  <option>Partial flight support</option>
-                  <option>Full flight support</option>
-                  <option>Visa support</option>
-                  <option>Not sure yet</option>
-                </select>
-              </label>
-            </div>
-
-            <div class="field-grid">
-              <label>
                 Accommodation preference
                 <select name="accommodation">
                   <option value="">Choose one</option>
@@ -281,10 +270,6 @@
                   <option>Need help deciding</option>
                   <option>Other</option>
                 </select>
-              </label>
-              <label>
-                Dietary notes
-                <input name="dietary" autocomplete="off">
               </label>
             </div>
 

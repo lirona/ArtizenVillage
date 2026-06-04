@@ -17,11 +17,10 @@ export function normalizeApplication(source = {}) {
     affiliation: String(source.affiliation || "").trim(),
     project: String(source.project || "").trim(),
     motivation: String(source.motivation || "").trim(),
+    dwebPrinciples: String(source.dwebPrinciples || "").trim(),
     contribution,
     arrival: String(source.arrival || "").trim(),
-    travelSupport: String(source.travelSupport || "").trim(),
     accommodation: String(source.accommodation || "").trim(),
-    dietary: String(source.dietary || "").trim(),
     website: String(source.website || "").trim()
   };
 }
@@ -58,16 +57,16 @@ export function validateApplication(source = {}) {
     errors.motivation = `Add at least ${MIN_MOTIVATION_LENGTH} characters about your motivation.`;
   }
 
+  if (!data.dwebPrinciples) {
+    errors.dwebPrinciples = "Tell us which DWeb principles resonate with you.";
+  }
+
   if (data.contribution.length === 0) {
     errors.contribution = "Choose at least one contribution.";
   }
 
   if (!data.arrival) {
     errors.arrival = "Choose an arrival plan.";
-  }
-
-  if (!data.travelSupport) {
-    errors.travelSupport = "Choose a travel support option.";
   }
 
   return {
@@ -93,11 +92,12 @@ export function buildApplicationSummary(source = {}) {
     "Why Artizen Village:",
     data.motivation,
     "",
+    "DWeb principles:",
+    data.dwebPrinciples,
+    "",
     `Contribution: ${data.contribution.join(", ")}`,
     `Arrival plan: ${data.arrival}`,
-    `Travel support needed: ${data.travelSupport}`,
     `Accommodation: ${optional(data.accommodation)}`,
-    `Dietary notes: ${optional(data.dietary)}`,
     `Link: ${optional(data.website)}`
   ].join("\n");
 }
@@ -113,11 +113,10 @@ export function serializeApplicationForSheet(source = {}) {
     affiliation: data.affiliation,
     project: data.project,
     motivation: data.motivation,
+    dwebPrinciples: data.dwebPrinciples,
     contribution: data.contribution.join(", "),
     arrival: data.arrival,
-    travelSupport: data.travelSupport,
     accommodation: data.accommodation,
-    dietary: data.dietary,
     website: data.website,
     summary: buildApplicationSummary(data)
   };
@@ -174,11 +173,10 @@ export function readApplicationForm(form) {
     affiliation: formData.get("affiliation"),
     project: formData.get("project"),
     motivation: formData.get("motivation"),
+    dwebPrinciples: formData.get("dwebPrinciples"),
     contribution: formData.getAll("contribution"),
     arrival: formData.get("arrival"),
-    travelSupport: formData.get("travelSupport"),
     accommodation: formData.get("accommodation"),
-    dietary: formData.get("dietary"),
     website: formData.get("website")
   };
 }

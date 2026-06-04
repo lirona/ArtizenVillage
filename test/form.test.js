@@ -16,11 +16,10 @@ const validApplication = {
   affiliation: "Artizen creator",
   project: "A public-good research artwork for decentralized communities.",
   motivation: "I want to contribute a practical salon session that connects creative funding, decentralized infrastructure, and conflict transformation.",
+  dwebPrinciples: "Human agency and ecological awareness resonate with how I build community-owned creative infrastructure.",
   contribution: ["Creator spotlight", "Workshop"],
   arrival: "July 8 setup window",
-  travelSupport: "Berlin transfer",
   accommodation: "Shared glamping",
-  dietary: "Vegetarian",
   website: "https://example.org",
 };
 
@@ -51,12 +50,12 @@ test("validateApplication reports every required missing field", () => {
     "affiliation",
     "arrival",
     "contribution",
+    "dwebPrinciples",
     "email",
     "fullName",
     "location",
     "motivation",
     "project",
-    "travelSupport",
   ]);
 });
 
@@ -84,13 +83,14 @@ test("buildApplicationSummary includes optional fallback values", () => {
   const summary = buildApplicationSummary({
     ...validApplication,
     accommodation: "",
-    dietary: "",
     website: ""
   });
 
+  assert.match(summary, /DWeb principles:/);
   assert.match(summary, /Accommodation: Not specified/);
-  assert.match(summary, /Dietary notes: Not specified/);
   assert.match(summary, /Link: Not specified/);
+  assert.doesNotMatch(summary, /Dietary notes:/);
+  assert.doesNotMatch(summary, /Travel support needed:/);
 });
 
 test("serializeApplicationForSheet creates a row payload", () => {
@@ -98,9 +98,11 @@ test("serializeApplicationForSheet creates a row payload", () => {
 
   assert.match(payload.submittedAt, /^\d{4}-\d{2}-\d{2}T/);
   assert.equal(payload.fullName, "Ada Lovelace");
+  assert.equal(payload.dwebPrinciples, validApplication.dwebPrinciples);
   assert.equal(payload.contribution, "Creator spotlight, Workshop");
-  assert.equal(payload.travelSupport, "Berlin transfer");
-  assert.match(payload.summary, /Travel support needed: Berlin transfer/);
+  assert.equal("travelSupport" in payload, false);
+  assert.equal("dietary" in payload, false);
+  assert.match(payload.summary, /DWeb principles:/);
   assert.match(payload.summary, /Artizen Village application/);
 });
 
