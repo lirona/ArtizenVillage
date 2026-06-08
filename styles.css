@@ -360,10 +360,6 @@ p {
   gap: 16px;
 }
 
-.thread-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
 .fact-card,
 .thread-card {
   min-height: 220px;
