@@ -1,3 +1,4 @@
+const SPREADSHEET_ID = "1EwmnvOxLkIgA-AI_FCAuDBJrJlrU6mUpwrD-EKcxGT8";
 const SHEET_NAME = "Applications";
 
 const HEADERS = [
@@ -15,6 +16,28 @@ const HEADERS = [
   "website",
   "summary"
 ];
+
+
+function doGet(event) {
+  try {
+    const sheet = getApplicationSheet_();
+    ensureHeaders_(sheet);
+
+    return jsonResponse_({
+      ok: true,
+      spreadsheetId: sheet.getParent().getId(),
+      spreadsheetUrl: sheet.getParent().getUrl(),
+      sheetName: sheet.getName(),
+      lastRow: sheet.getLastRow(),
+      headers: sheet.getRange(1, 1, 1, HEADERS.length).getValues()[0]
+    });
+  } catch (error) {
+    return jsonResponse_({
+      ok: false,
+      error: error.message
+    });
+  }
+}
 
 function doPost(event) {
   const lock = LockService.getScriptLock();
@@ -41,8 +64,21 @@ function doPost(event) {
 }
 
 function getApplicationSheet_() {
-  const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  return spreadsheet.getSheetByName(SHEET_NAME) || spreadsheet.insertSheet(SHEET_NAME);
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const namedSheet = spreadsheet.getSheetByName(SHEET_NAME);
+
+  if (namedSheet) {
+    return namedSheet;
+  }
+
+  const firstSheet = spreadsheet.getSheets()[0];
+
+  if (firstSheet && firstSheet.getLastRow() === 0) {
+    firstSheet.setName(SHEET_NAME);
+    return firstSheet;
+  }
+
+  return spreadsheet.insertSheet(SHEET_NAME);
 }
 
 function ensureHeaders_(sheet) {
