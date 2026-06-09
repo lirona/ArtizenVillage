@@ -129,8 +129,7 @@ button {
 
 .eyebrow,
 .section-kicker,
-.fact-label,
-.thread-number {
+.fact-label {
   margin: 0 0 14px;
   color: var(--algae);
   font-size: 0.82rem;
@@ -250,7 +249,6 @@ section {
 }
 
 .intro-band,
-.program-band,
 .logistics-band {
   padding: 92px 0;
   background: var(--paper);
@@ -353,15 +351,13 @@ p {
   color: var(--muted);
 }
 
-.facts-grid,
-.thread-grid {
+.facts-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
 }
 
-.fact-card,
-.thread-card {
+.fact-card {
   min-height: 220px;
   padding: 22px;
   border-radius: var(--radius);
@@ -369,10 +365,6 @@ p {
   background: rgba(255, 255, 255, 0.06);
 }
 
-.thread-card {
-  background: var(--white);
-  border-color: var(--line);
-}
 
 .fact-card strong {
   display: block;
@@ -401,14 +393,6 @@ p {
   object-fit: cover;
 }
 
-.thread-card h3 {
-  font-family: p22-mackinac-pro, Georgia, serif;
-  font-size: 1.75rem;
-}
-
-.thread-card p {
-  color: var(--muted);
-}
 
 .experience-list,
 .timeline {
@@ -652,8 +636,7 @@ fieldset {
     aspect-ratio: 3 / 4;
   }
 
-  .facts-grid,
-  .thread-grid {
+  .facts-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -684,7 +667,6 @@ fieldset {
   }
 
   .intro-band,
-  .program-band,
   .logistics-band,
   .image-band,
   .apply-band {
@@ -697,13 +679,11 @@ fieldset {
   }
 
   .facts-grid,
-  .thread-grid,
   .checkbox-grid {
     grid-template-columns: 1fr;
   }
 
-  .fact-card,
-  .thread-card {
+  .fact-card {
     min-height: 0;
   }
 
