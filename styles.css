@@ -586,6 +586,10 @@ fieldset {
   .hero {
     min-height: 92svh;
     padding: 174px 20px 30px;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: stretch;
+    gap: 24px;
   }
 
   .hero h1 {
@@ -598,13 +602,15 @@ fieldset {
   }
 
   .hero-content {
-    padding-bottom: 118px;
+    padding-bottom: 0;
   }
 
   .hero-meta {
-    left: 20px;
-    right: 20px;
-    width: calc(100% - 40px);
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    width: min(100%, var(--max));
     grid-template-columns: 1fr;
   }
 
@@ -663,7 +669,7 @@ fieldset {
   }
 
   .hero-content {
-    padding-bottom: 140px;
+    padding-bottom: 0;
   }
 
   .intro-band,
