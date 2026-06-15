@@ -351,6 +351,11 @@ p {
   color: var(--muted);
 }
 
+.deadline-note {
+  color: var(--algae-dark);
+  font-weight: 800;
+}
+
 .facts-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
